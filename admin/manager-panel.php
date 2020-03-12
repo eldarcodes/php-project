@@ -3,13 +3,13 @@ session_start();
 
 require_once "../scripts/classes.php";
 
-if($_SESSION['user']['lvluser'] !== "4")
+if($_SESSION['user']['lvluser'] < 2)
 {
   header("Location: ../blocks/index.php");
   exit();
 }
 else{
-  $MY_USER = new Creator();
+  $MY_USER = new Manager();
 
 
 $row = $_SESSION['user']['login'];
@@ -27,7 +27,7 @@ if ($database->checkData('login', $_SESSION['user']['login']) == 0 || !$_SESSION
   <section class="users">
     <div class="container">
       <div class="users-items">
-      <?php $MY_USER->drawCreatePanel();?>
+      <?php $MY_USER->drawManagerPanel();?>
       </div>
     </div>
   </section>
