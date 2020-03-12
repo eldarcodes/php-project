@@ -1,6 +1,7 @@
 <?php
 session_start();
-require "../database/db.php";
+
+include "../scripts/classes.php";
 
 $userlogin = $_POST['login'];
 $userpassword = $_POST['password'];
@@ -8,17 +9,15 @@ $useremail = $_POST['email'];
 $username = $_POST['name'];
 $usersurname = $_POST['surname'];
 $confirmpassword = $_POST['confirm_password'];
-$user_register_date = date("d.m.Y");   
+$user_register_date = date("d.m.Y");
 
-$checklogin = mysqli_query($connection, "SELECT * FROM `users` WHERE `login` = '$userlogin'");
-$checkmail = mysqli_query($connection, "SELECT * FROM `users` WHERE `email` = '$useremail'");
-if (mysqli_num_rows($checklogin) > 0) {
+if ($database->checkData('login', $checklogin) > 0) {
     $_SESSION['message'] = "Этот логин занят";
     $_SESSION['returnname'] = $username;
     $_SESSION['returnsurname'] = $usersurname;
     $_SESSION['returnemail'] = $useremail;
     header("Location: ../blocks/register.php");
-} else if (mysqli_num_rows($checkmail) > 0) {
+} else if ($database->checkData('email', $useremail) > 0) {
     $_SESSION['returnname'] = $username;
     $_SESSION['returnsurname'] = $usersurname;
     $_SESSION['returnlogin'] = $userlogin;
@@ -27,7 +26,7 @@ if (mysqli_num_rows($checklogin) > 0) {
 } else {
     if ($userpassword !== 0 && $userpassword === $confirmpassword && !empty($userlogin) && !empty($useremail)) {
         $userpassword = md5($userpassword);
-        mysqli_query($connection, "INSERT INTO `users` (`id`, `name`, `surname`, `login`, `email`, `password`, `lvluser`, `date_registration`) VALUES (NULL, '$username', '$usersurname', '$userlogin', '$useremail', '$userpassword', '1' , '$user_register_date')");
+        mysqli_query($database->connect(), "INSERT INTO `users` (`id`, `name`, `surname`, `login`, `email`, `password`, `lvluser`, `date_registration`) VALUES (NULL, '$username', '$usersurname', '$userlogin', '$useremail', '$userpassword', '1' , '$user_register_date')");
         $_SESSION['message'] = "Вы успешно зарегистрировались";
         header("Location: ../blocks/authorization.php");
     } else {

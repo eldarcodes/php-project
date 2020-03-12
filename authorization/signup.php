@@ -1,13 +1,11 @@
 <?php
 session_start();
-require '../database/db.php';
-include '../scripts/classes.php';
+include "../scripts/classes.php";
 $login = $_POST['login'];
 $password = $_POST['password'];
 $password = md5($password);
-$checkuser = mysqli_query($connection, "SELECT * FROM `users` WHERE `login` = '$login' AND `password` = '$password'");
-$checklogin = mysqli_query($connection, "SELECT * FROM `users` WHERE `login` = '$login'");
-$checkpassword = mysqli_query($connection, "SELECT * FROM `users` WHERE `password` = '$password'");
+
+$checkuser = mysqli_query($database->connect(), "SELECT * FROM `users` WHERE `login` = '$login' AND `password` = '$password'");
 
 if (mysqli_num_rows($checkuser) > 0) {
     $user = mysqli_fetch_assoc($checkuser);
@@ -18,7 +16,7 @@ if (mysqli_num_rows($checkuser) > 0) {
         'surname' => $user['surname'],
         'lvluser' => $user['lvluser'],
         'login' => $user['login'],
-        'date'=>$user['date_registration'],
+        'date' => $user['date_registration'],
         'role' => "",
     ];
     switch ($_SESSION['user']['lvluser']) {
@@ -32,19 +30,19 @@ if (mysqli_num_rows($checkuser) > 0) {
             $_SESSION['user']['role'] = "Администратор";
             break;
         case 4:
-            
+
             $_SESSION['user']['role'] = "Создатель";
             break;
     }
     header("Location: ../blocks/index.php");
     exit();
 } else {
-    if (mysqli_num_rows($checklogin) === 0) {
+    if ($database->checkData('login', $login) === 0) {
         $_SESSION['message'] = "Пользователя не существует!";
         header("location: ../blocks/authorization.php");
         exit;
     }
-    if (mysqli_num_rows($checkpassword) === 0) {
+    if ($database->checkData('password', $password) === 0) {
         $_SESSION['message'] = "Вы ввели неверный пароль!";
         header("location: ../blocks/authorization.php");
         exit;

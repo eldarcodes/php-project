@@ -1,15 +1,15 @@
 <?php
 
-include '../database/db.php';
+$database = new Database();
 
+class User
+{
 
-class User{
-
-    function drawPanel(){
-
+    function drawPanel()
+    {
     }
-    function draw($connection){
-
+    function draw($connection)
+    {
     }
 }
 class Admin
@@ -96,7 +96,27 @@ class Manager
     {
         echo ' <a class="btn btn-outline-primary mr-3" href="../admin/creator-panel.php">Панель менеджера</a>';
     }
+}
 
+class Database
+{
+    public $dbhost = "localhost";
+    public $dblogin = "root";
+    public $dbpassword = "123456";
+    public $dbname = "identification";
+
+
+    function connect()
+    {
+        $connection = mysqli_connect($this->dbhost, $this->dblogin, $this->dbpassword, $this->dbname);
+        return $connection;
+    }
+
+    function checkData($column, $values)
+    {
+        $result = mysqli_query($this->connect(), "SELECT * FROM `users` WHERE `$column` = '$values'");
+        return mysqli_num_rows($result);
+    }
 }
 
 
@@ -113,9 +133,8 @@ switch ($_SESSION['user']['role']) {
             $USER_RIGHTS = new Manager();
             break;
         }
-    case "Пользователь":
-    {
-        $USER_RIGHTS = new User();
-        break;
-    }
+    case "Пользователь": {
+            $USER_RIGHTS = new User();
+            break;
+        }
 }
