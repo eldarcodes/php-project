@@ -43,7 +43,6 @@ include_once "../scripts/classes.php";
                     </div>
                 </div>
             </div>
-
         </header>
     <?php
     } ?>

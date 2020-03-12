@@ -2,23 +2,22 @@
 
 $database = new Database();
 
-class User
+class User extends Database
 {
-
     function drawPanel()
     {
+        $login = $_SESSION['user']['login'];
+        $lvluser = $_SESSION['user']['lvluser'];
+        $checkuser = mysqli_query($this->connect(), "SELECT * FROM `users` WHERE `login` = '$login' AND `password` = '$lvluser'");
+        $user = mysqli_fetch_assoc($checkuser);
+        print_r($user);
     }
     function draw($connection)
     {
     }
 }
-class Admin
+class Admin extends User
 {
-    function drawPanel()
-    {
-        echo ' <a class="btn btn-outline-primary mr-3" href="../admin/creator-panel.php">Панель администратора</a>';
-    }
-
     function draw($connection)
     {
         $result = mysqli_query($connection, "SELECT * FROM `users` ");
@@ -50,13 +49,8 @@ class Admin
     }
 }
 
-class Creator
+class Creator extends User
 {
-    function drawPanel()
-    {
-        echo ' <a class="btn btn-outline-primary mr-3" href="../admin/creator-panel.php">Панель разработчика</a>';
-    }
-
     function draw($connection)
     {
 
