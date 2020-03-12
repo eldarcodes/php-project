@@ -9,13 +9,18 @@ $username = $_POST['name'];
 $usersurname = $_POST['surname'];
 $confirmpassword = $_POST['confirm_password'];
 
-
 $checklogin = mysqli_query($connection, "SELECT * FROM `users` WHERE `login` = '$userlogin'");
 $checkmail = mysqli_query($connection, "SELECT * FROM `users` WHERE `email` = '$useremail'");
 if (mysqli_num_rows($checklogin) > 0) {
     $_SESSION['message'] = "Этот логин занят";
+    $_SESSION['returnname'] = $username;
+    $_SESSION['returnsurname'] = $usersurname;
+    $_SESSION['returnemail'] = $useremail;
     header("Location: ../blocks/register.php");
 } else if (mysqli_num_rows($checkmail) > 0) {
+    $_SESSION['returnname'] = $username;
+    $_SESSION['returnsurname'] = $usersurname;
+    $_SESSION['returnlogin'] = $userlogin;
     $_SESSION['message'] = "Пользователь с данной почтой существует";
     header("Location: ../blocks/register.php");
 } else {
@@ -25,6 +30,8 @@ if (mysqli_num_rows($checklogin) > 0) {
         $_SESSION['message'] = "Вы успешно зарегистрировались";
         header("Location: ../blocks/authorization.php");
     } else {
+        $_SESSION['returnname'] = $username;
+        $_SESSION['returnsurname'] = $usersurname;
         $_SESSION['message'] = "Попробуйте зарегистрироваться снова";
         header("Location: ../blocks/register.php");
     }

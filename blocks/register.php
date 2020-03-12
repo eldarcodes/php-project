@@ -7,22 +7,35 @@ if ($_SESSION['user']) {
 include "header.php"; ?>
 <section class="form-auth">
     <div class="form-auth-inner">
+        <?php  ?>
         <form action="../authorization/signin.php" method="POST">
             <div class="form-group">
                 <label>Введите ваше имя</label>
-                <input type="text" class="form-control" name="name">
+                <input value="<?php if (isset($_SESSION['returnname'])) {
+                                    echo $_SESSION['returnname'];
+                                    unset($_SESSION['returnname']);
+                                }  ?>" type="text" class="form-control" name="name">
             </div>
             <div class="form-group">
                 <label>Введите вашу фамилию</label>
-                <input type="text" class="form-control" name="surname">
+                <input value="<?php if (isset($_SESSION['returnsurname'])) {
+                                    echo $_SESSION['returnsurname'];
+                                    unset($_SESSION['returnsurname']);
+                                }  ?>" type="text" class="form-control" name="surname">
             </div>
             <div class="form-group">
                 <label>Введите логин</label>
-                <input type="text" class="form-control" name="login">
+                <input value="<?php if (isset($_SESSION['returnlogin'])) {
+                                    echo $_SESSION['returnlogin'];
+                                    unset($_SESSION['returnlogin']);
+                                }  ?>" type="text" class="form-control" name="login">
             </div>
             <div class="form-group">
                 <label>Введите вашу почту</label>
-                <input type="email" class="form-control" name="email">
+                <input value="<?php if (isset($_SESSION['returnemail'])) {
+                                    echo $_SESSION['returnemail'];
+                                    unset($_SESSION['returnemail']);
+                                }  ?>" type="email" class="form-control" name="email">
                 <div class="form-group">
                     <label>Введите пароль</label>
                     <input type="password" class="form-control" name="password">
