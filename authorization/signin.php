@@ -8,6 +8,7 @@ $useremail = $_POST['email'];
 $username = $_POST['name'];
 $usersurname = $_POST['surname'];
 $confirmpassword = $_POST['confirm_password'];
+$user_register_date = date("d.m.Y");   
 
 $checklogin = mysqli_query($connection, "SELECT * FROM `users` WHERE `login` = '$userlogin'");
 $checkmail = mysqli_query($connection, "SELECT * FROM `users` WHERE `email` = '$useremail'");
@@ -26,7 +27,7 @@ if (mysqli_num_rows($checklogin) > 0) {
 } else {
     if ($userpassword !== 0 && $userpassword === $confirmpassword && !empty($userlogin) && !empty($useremail)) {
         $userpassword = md5($userpassword);
-        mysqli_query($connection, "INSERT INTO `users` (`id`, `name`, `surname`, `login`, `email`, `password`, `lvluser`) VALUES (NULL, '$username', '$usersurname', '$userlogin', '$useremail', '$userpassword', '1')");
+        mysqli_query($connection, "INSERT INTO `users` (`id`, `name`, `surname`, `login`, `email`, `password`, `lvluser`, `date_registration`) VALUES (NULL, '$username', '$usersurname', '$userlogin', '$useremail', '$userpassword', '1' , '$user_register_date')");
         $_SESSION['message'] = "Вы успешно зарегистрировались";
         header("Location: ../blocks/authorization.php");
     } else {

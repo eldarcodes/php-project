@@ -9,7 +9,7 @@ class User{
 
     }
     function draw($connection){
-        
+
     }
 }
 class Admin
@@ -43,6 +43,7 @@ class Admin
               <h5 class="card-title">' . $row['name'] . ' ' . $row['surname'] . '</h5>
               <p class="card-text">Почта: ' . $row['email'] . '</p>
               <p class="card-text">Роль: ' . $row['role'] . '</p>
+              <p class="card-text">Дата регистрации: ' . $row['date_registration'] . '</p>
             </div>
           </div>';
         }
@@ -82,6 +83,7 @@ class Creator
               <p class="card-text">Логин: ' . $row['login'] . '</p>
               <p class="card-text">Почта: ' . $row['email'] . '</p>
               <p class="card-text">Роль: ' . $row['role'] . '</p>
+              <p class="card-text">Дата регистрации: ' . $row['date_registration'] . '</p>
             </div>
           </div>';
         }

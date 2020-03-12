@@ -17,6 +17,8 @@ if (mysqli_num_rows($checkuser) > 0) {
         'email' => $user['email'],
         'surname' => $user['surname'],
         'lvluser' => $user['lvluser'],
+        'login' => $user['login'],
+        'date'=>$user['date_registration'],
         'role' => "",
     ];
     switch ($_SESSION['user']['lvluser']) {
