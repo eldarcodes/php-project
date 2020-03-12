@@ -18,6 +18,9 @@ if (mysqli_num_rows($checkuser) > 0) {
         'login' => $user['login'],
         'date' => $user['date_registration'],
         'role' => "",
+        'city' => "",
+        'gender' => "",
+        'avatar' => "",
     ];
     switch ($_SESSION['user']['lvluser']) {
         case 1:
