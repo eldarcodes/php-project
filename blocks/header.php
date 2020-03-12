@@ -24,7 +24,7 @@ include "../scripts/classes.php";
                 <div class="container">
                     <div class="d-flex flex-column flex-md-row align-items-center ">
                         <h5 class="my-0 mr-md-auto font-weight-normal"><a href="./index.php" class="text-dark logo">MyWebSite</a></h5>
-                        <a class="btn btn-outline-primary" href="../blocks/authorization.php">Войти</a>
+                        <a class="btn btn-outline-primary" href="../blocks/authorization.php">Войтиasdasdasdasdasd</a>
                     </div>
                 </div>
             </div>
