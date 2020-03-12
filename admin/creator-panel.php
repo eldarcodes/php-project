@@ -1,6 +1,16 @@
 <?php
 session_start();
-if($_SESSION['role'] === "Менеджер" && $_SESSION['role'] === "Пользователь")
+include "../database/db.php";
+$row = $_SESSION['user']['login'];
+$result = mysqli_query($connection, "SELECT * FROM `users` WHERE `login` = '$row'");
+if(mysqli_num_rows($result) == 0 || !$_SESSION['user']['login'])
+{
+    header("Location: ../blocks/authorization.php");
+    unset($_SESSION['user']);
+    exit();
+}
+else{
+  if($_SESSION['role'] === "Менеджер" && $_SESSION['role'] === "Пользователь")
 {
   header("Location: ../blocks/index.php");
 }
@@ -21,3 +31,5 @@ require_once "../scripts/classes.php";
     </div>
   </div>
 </section>
+<?php
+}
