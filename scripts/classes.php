@@ -3,7 +3,15 @@
 include '../database/db.php';
 
 
+class User{
 
+    function drawPanel(){
+
+    }
+    function draw($connection){
+        
+    }
+}
 class Admin
 {
     function drawPanel()
@@ -88,17 +96,7 @@ class Manager
     }
 
 }
-class User{
 
-    function drawPanel()
-    {
-        
-    }
-     function draw($connection)
-    {
-    
-    }
-}
 
 switch ($_SESSION['user']['role']) {
     case "Создатель": {
