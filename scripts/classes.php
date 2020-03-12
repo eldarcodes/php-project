@@ -82,8 +82,23 @@ class Creator
 
 class Manager
 {
-}
+    function drawPanel()
+    {
+        echo ' <a class="btn btn-outline-primary mr-3" href="../admin/creator-panel.php">Панель менеджера</a>';
+    }
 
+}
+class User{
+
+    function drawPanel()
+    {
+        
+    }
+     function draw($connection)
+    {
+    
+    }
+}
 
 switch ($_SESSION['user']['role']) {
     case "Создатель": {
@@ -98,4 +113,9 @@ switch ($_SESSION['user']['role']) {
             $USER_RIGHTS = new Manager();
             break;
         }
+    case "Пользователь":
+    {
+        $USER_RIGHTS = new User();
+        break;
+    }
 }
