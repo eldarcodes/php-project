@@ -6,7 +6,6 @@ class User extends Database
 {
     function draw()
     {
-        
     }
     function drawPanel()
     {
@@ -15,38 +14,33 @@ class User extends Database
         $checkuser = mysqli_query($this->connect(), "SELECT * FROM `users` WHERE `login` = '$login' ");
         $row = mysqli_fetch_assoc($checkuser);
         unset($_SESSION['user']['role']);
-        switch($row['lvluser'])
-        {
-            case 1:
-                {
+        switch ($row['lvluser']) {
+            case 1: {
                     $_SESSION['user']['lvluser'] = $row['lvluser'];
                     $_SESSION['user']['role'] = "Пользователь";
                     break;
                 }
 
-            case 2:
-                {
+            case 2: {
                     $_SESSION['user']['lvluser'] = $row['lvluser'];
-                $_SESSION['user']['role'] = "Менеджер";
-                echo ' <a class="btn btn-outline-primary mr-3" href="../admin/manager-panel.php">Панель менеджера</a>';
-            break;
+                    $_SESSION['user']['role'] = "Менеджер";
+                    echo ' <a class="btn btn-outline-primary mr-3" href="../admin/manager-panel.php">Панель менеджера</a>';
+                    break;
                 }
-            case 3:
-                {
-                $_SESSION['user']['lvluser'] = $row['lvluser'];
-            $_SESSION['user']['role'] = "Администратор";
-            echo ' <a class="btn btn-outline-primary mr-3" href="../admin/admin-panel.php">Панель администратора</a>';
-            break;
+            case 3: {
+                    $_SESSION['user']['lvluser'] = $row['lvluser'];
+                    $_SESSION['user']['role'] = "Администратор";
+                    echo ' <a class="btn btn-outline-primary mr-3" href="../admin/admin-panel.php">Панель администратора</a>';
+                    break;
+                }
+            case 4: {
+                    $_SESSION['user']['lvluser'] = $row['lvluser'];
+                    $_SESSION['user']['role'] = "Создатель";
+                    echo ' <a class="btn btn-outline-primary mr-3" href="../admin/creator-panel.php">Панель создателя</a>';
+                    break;
+                }
         }
-            case 4:
-                {$_SESSION['user']['lvluser'] = $row['lvluser'];
-            $_SESSION['user']['role'] = "Создатель";
-            echo ' <a class="btn btn-outline-primary mr-3" href="../admin/creator-panel.php">Панель создателя</a>';
-        break;
-        }
-        
     }
-}
 }
 class Admin extends User
 {
@@ -79,7 +73,6 @@ class Admin extends User
           </div>';
         }
     }
-    
 }
 
 class Creator extends User
@@ -146,7 +139,6 @@ class Manager extends User
           </div>';
         }
     }
-
 }
 
 class Database

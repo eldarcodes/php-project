@@ -16,10 +16,13 @@ if ($database->checkData('login', $_SESSION['user']['login']) == 0 || !$_SESSION
       <div class="card-inner">
         <div class="card w-100%">
           <div class="card-body">
-            <h5 class="card-title"><?php echo $_SESSION['user']['name'] . ' ' . $_SESSION['user']['surname'];?></h5>
+            <img src="/assets/img/photo_2020-03-12_22-13-50.jpg" width="300" class="mb-3" alt="Profile">
+            <h5 class="card-title"><?php echo $_SESSION['user']['name'] . ' ' . $_SESSION['user']['surname']; ?></h5>
             <p class="card-text">Ваша почта: <?php echo $_SESSION['user']['email']; ?></p>
             <p class="card-text">Ваша роль:<?php echo $_SESSION['user']['role']; ?></p>
             <p class="card-text">Дата регистрации:<?php echo $_SESSION['user']['date']; ?></p>
+            <a href="#" class="btn btn-primary ">Редактировать профиль</a>
+            <!-- <?php include "./editProfile.php"; ?> -->
           </div>
         </div>
       </div>
