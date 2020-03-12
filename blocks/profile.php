@@ -5,7 +5,7 @@ include "../scripts/classes.php";
 
 if ($database->checkData('login', $_SESSION['user']['login']) == 0 || !$_SESSION['user']['login']) {
   header("Location: authorization.php");
-  unset($_SESSION['user']);
+  unset($_SESSION['user']['lvluser']);
   exit();
 } else {
   include "header.php";
@@ -16,7 +16,7 @@ if ($database->checkData('login', $_SESSION['user']['login']) == 0 || !$_SESSION
       <div class="card-inner">
         <div class="card w-100%">
           <div class="card-body">
-            <h5 class="card-title"><?php echo $_SESSION['user']['name'] . ' ' . $_SESSION['user']['surname']; ?></h5>
+            <h5 class="card-title"><?php echo $_SESSION['user']['name'] . ' ' . $_SESSION['user']['surname'];?></h5>
             <p class="card-text">Ваша почта: <?php echo $_SESSION['user']['email']; ?></p>
             <p class="card-text">Ваша роль:<?php echo $_SESSION['user']['role']; ?></p>
             <p class="card-text">Дата регистрации:<?php echo $_SESSION['user']['date']; ?></p>

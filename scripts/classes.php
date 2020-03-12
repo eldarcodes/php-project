@@ -4,92 +4,89 @@ $database = new Database();
 
 class User extends Database
 {
+    function draw()
+    {
+        $result = mysqli_query($this->connect(), "SELECT * FROM `users` ");
+
+        while ($row = mysqli_fetch_array($result)) {
+            switch ($row['lvluser']) {
+                case 1:
+                    $row['role'] = "Пользователь";
+                    break;
+                case 2:
+                    $row['role'] = "Менеджер";
+                    break;
+                case 3:
+                    $row['role'] = "Администратор";
+                    break;
+                case 4:
+                    $row['role'] = "Создатель";
+                    break;
+            }
+            echo '<div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">' . $row['name'] . ' ' . $row['surname'] . '</h5>
+              <p class="card-text">Почта: ' . $row['email'] . '</p>
+              <p class="card-text">Роль: ' . $row['role'] . '</p>
+              <p class="card-text">Дата регистрации: ' . $row['date_registration'] . '</p>
+            </div>
+          </div>';
+        }
+    }
     function drawPanel()
     {
         $login = $_SESSION['user']['login'];
         $lvluser = $_SESSION['user']['lvluser'];
-        $checkuser = mysqli_query($this->connect(), "SELECT * FROM `users` WHERE `login` = '$login' AND `password` = '$lvluser'");
-        $user = mysqli_fetch_assoc($checkuser);
-        print_r($user);
+        $checkuser = mysqli_query($this->connect(), "SELECT * FROM `users` WHERE `login` = '$login' ");
+        $row = mysqli_fetch_assoc($checkuser);
+        unset($_SESSION['user']['role']);
+        switch($row['lvluser'])
+        {
+            case 1:
+                {
+                    $_SESSION['user']['lvluser'] = $row['lvluser'];
+                    $_SESSION['user']['role'] = "Пользователь";
+                    break;
+                }
+
+            case 2:
+                {
+                    $_SESSION['user']['lvluser'] = $row['lvluser'];
+                $_SESSION['user']['role'] = "Менеджер";
+                echo ' <a class="btn btn-outline-primary mr-3" href="../admin/creator-panel.php">Панель менеджера</a>';
+            break;
+                }
+            case 3:
+                {
+                $_SESSION['user']['lvluser'] = $row['lvluser'];
+            $_SESSION['user']['role'] = "Администратор";
+            echo ' <a class="btn btn-outline-primary mr-3" href="../admin/creator-panel.php">Панель администратора</a>';
+            break;
+        }
+            case 4:
+                {$_SESSION['user']['lvluser'] = $row['lvluser'];
+            $_SESSION['user']['role'] = "Создатель";
+            echo ' <a class="btn btn-outline-primary mr-3" href="../admin/creator-panel.php">Панель создателя</a>';
+        break;
+        }
+        
     }
-    function draw($connection)
-    {
-    }
+}
 }
 class Admin extends User
 {
-    function draw($connection)
-    {
-        $result = mysqli_query($connection, "SELECT * FROM `users` ");
 
-        while ($row = mysqli_fetch_array($result)) {
-            switch ($row['lvluser']) {
-                case 1:
-                    $row['role'] = "Пользователь";
-                    break;
-                case 2:
-                    $row['role'] = "Менеджер";
-                    break;
-                case 3:
-                    $row['role'] = "Администратор";
-                    break;
-                case 4:
-                    $row['role'] = "Создатель";
-                    break;
-            }
-            echo '<div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title">' . $row['name'] . ' ' . $row['surname'] . '</h5>
-              <p class="card-text">Почта: ' . $row['email'] . '</p>
-              <p class="card-text">Роль: ' . $row['role'] . '</p>
-              <p class="card-text">Дата регистрации: ' . $row['date_registration'] . '</p>
-            </div>
-          </div>';
-        }
-    }
 }
 
 class Creator extends User
 {
-    function draw($connection)
-    {
 
-        $result = mysqli_query($connection, "SELECT * FROM `users` ");
-
-        while ($row = mysqli_fetch_array($result)) {
-            switch ($row['lvluser']) {
-                case 1:
-                    $row['role'] = "Пользователь";
-                    break;
-                case 2:
-                    $row['role'] = "Менеджер";
-                    break;
-                case 3:
-                    $row['role'] = "Администратор";
-                    break;
-                case 4:
-                    $row['role'] = "Создатель";
-                    break;
-            }
-            echo '<div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title">' . $row['name'] . ' ' . $row['surname'] . '</h5>
-              <p class="card-text">Логин: ' . $row['login'] . '</p>
-              <p class="card-text">Почта: ' . $row['email'] . '</p>
-              <p class="card-text">Роль: ' . $row['role'] . '</p>
-              <p class="card-text">Дата регистрации: ' . $row['date_registration'] . '</p>
-            </div>
-          </div>';
-        }
-    }
 }
 
-class Manager
+class Manager extends User
 {
-    function drawPanel()
-    {
-        echo ' <a class="btn btn-outline-primary mr-3" href="../admin/creator-panel.php">Панель менеджера</a>';
-    }
+    
+
 }
 
 class Database
@@ -113,22 +110,10 @@ class Database
     }
 }
 
-
-switch ($_SESSION['user']['role']) {
-    case "Создатель": {
-            $USER_RIGHTS = new Creator();
-            break;
-        }
-    case "Администратор": {
-            $USER_RIGHTS = new Admin();
-            break;
-        }
-    case "Менеджер": {
-            $USER_RIGHTS = new Manager();
-            break;
-        }
-    case "Пользователь": {
-            $USER_RIGHTS = new User();
-            break;
-        }
+switch($_SESSION['user']['lvluser'])
+{
+    case "1":  $USER_RIGHTS = new User();break;
+    case "2":  $USER_RIGHTS = new Manager();break;
+    case "3":  $USER_RIGHTS = new Admin();break;
+    case "4":  $USER_RIGHTS = new Creator();break;
 }

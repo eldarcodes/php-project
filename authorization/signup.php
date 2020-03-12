@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "../scripts/classes.php";
+require_once "../scripts/classes.php";
 $login = $_POST['login'];
 $password = $_POST['password'];
 $password = md5($password);
@@ -30,7 +30,6 @@ if (mysqli_num_rows($checkuser) > 0) {
             $_SESSION['user']['role'] = "Администратор";
             break;
         case 4:
-
             $_SESSION['user']['role'] = "Создатель";
             break;
     }
