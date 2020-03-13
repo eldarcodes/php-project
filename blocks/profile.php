@@ -18,6 +18,7 @@ else{
     <div class="card-inner">
       <div class="card w-100%">
         <div class="card-body">
+
          <?php 
          $myLogin = $_SESSION['user']['login'];
          $result = mysqli_query($database->connect(),"SELECT * FROM `users` WHERE `login` = '$myLogin' ");
