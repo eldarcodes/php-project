@@ -46,7 +46,7 @@ class Admin extends User
 {
     public function drawAdminPanel()
     {
-        $result = mysqli_query($this->connect(), "SELECT * FROM `users` ");
+        $result = mysqli_query($this->connect(), "SELECT * FROM `users`");
 
         while ($row = mysqli_fetch_array($result)) {
             switch ($row['lvluser']) {
@@ -63,23 +63,35 @@ class Admin extends User
                     $row['role'] = "Создатель";
                     break;
             }
-            echo '<div class="card" style="width: 18rem;">
+            ?>
+            <div class="card" style="width: 18rem;">
             <div class="card-body">
-              <h5 class="card-title">' . $row['name'] . ' ' . $row['surname'] . '</h5>
-              <p class="card-text">Почта: ' . $row['email'] . '</p>
-              <p class="card-text">Роль: ' . $row['role'] . '</p>
-              <p class="card-text">Дата регистрации: ' . $row['date_registration'] . '</p>
+            <img src="<?php echo $row['avatar'] ?>"style="max-height: 300px;" width="200px" height="200px" class="mb-3" alt="Profile">
+             <h5 class="card-title"><?php echo $row['name'] . ' ' .  $row['surname'] ?></h5>
+              <p class="card-text"><?php echo "Роль: " . $row['role']; ?></p>
+               <?php
+              if($row['city']!= "")
+              {
+              echo '<p class="card-text">Родной город:'  . $row['city'] . '</p>';
+              }
+              ?>
+              <p class="card-text"><?php echo "Пол: " . $row['gender']; ?></p>
+              <p class="card-text"><?php echo "Дата рождения: " . $row['date_birhday']; ?> </p>
+              <p class="card-text"><?php echo "Дата регистрации: " . $row['date_registration']; ?></p>
             </div>
-          </div>';
+          </div>
+          <?php
         }
     }
 }
+
+
 
 class Creator extends User
 {
     public function drawCreatePanel()
     {
-        $result = mysqli_query($this->connect(), "SELECT * FROM `users` ");
+        $result = mysqli_query($this->connect(), "SELECT * FROM `users`");
 
         while ($row = mysqli_fetch_array($result)) {
             switch ($row['lvluser']) {
@@ -96,15 +108,26 @@ class Creator extends User
                     $row['role'] = "Создатель";
                     break;
             }
-            echo '<div class="card" style="width: 18rem;">
+            ?>
+            <div class="card" style="width: 18rem;">
             <div class="card-body">
-              <h5 class="card-title">' . $row['name'] . ' ' . $row['surname'] . '</h5>
-              <p class="card-text">Логин: ' . $row['login'] . '</p>
-              <p class="card-text">Почта: ' . $row['email'] . '</p>
-              <p class="card-text">Роль: ' . $row['role'] . '</p>
-              <p class="card-text">Дата регистрации: ' . $row['date_registration'] . '</p>
+            <img src="<?php echo $row['avatar'] ?>"style="max-height: 300px;" width="200px" height="200px" class="mb-3" alt="Profile">
+             <h5 class="card-title"><?php echo $row['name'] . ' ' .  $row['surname'] ?></h5>
+              <p class="card-text"><?php echo "Логин: " . $row['login']; ?> <p
+              <p class="card-text"><?php echo "Почта: " . $row['email']; ?></p>
+              <p class="card-text"><?php echo "Роль: " . $row['role']; ?></p>
+               <?php
+              if($row['city']!= "")
+              {
+              echo '<p class="card-text">Родной город:'  . $row['city'] . '</p>';
+              }
+              ?>
+              <p class="card-text"><?php echo "Пол: " . $row['gender']; ?></p>
+              <p class="card-text"><?php echo "Дата рождения: " . $row['date_birhday']; ?> </p>
+              <p class="card-text"><?php echo "Дата регистрации: " . $row['date_registration']; ?></p>
             </div>
-          </div>';
+          </div>
+          <?php
         }
     }
 }
@@ -113,7 +136,7 @@ class Manager extends User
 {
     public function drawManagerPanel()
     {
-        $result = mysqli_query($this->connect(), "SELECT * FROM `users` ");
+        $result = mysqli_query($this->connect(), "SELECT * FROM `users`");
 
         while ($row = mysqli_fetch_array($result)) {
             switch ($row['lvluser']) {
@@ -130,13 +153,24 @@ class Manager extends User
                     $row['role'] = "Создатель";
                     break;
             }
-            echo '<div class="card" style="width: 18rem;">
+            ?>
+            <div class="card" style="width: 18rem;">
             <div class="card-body">
-              <h5 class="card-title">' . $row['name'] . ' ' . $row['surname'] . '</h5>
-              <p class="card-text">Почта: ' . $row['email'] . '</p>
-              <p class="card-text">Роль: ' . $row['role'] . '</p>
+            <img src="<?php echo $row['avatar'] ?>"style="max-height: 300px;" width="200px" height="200px" class="mb-3" alt="Profile">
+             <h5 class="card-title"><?php echo $row['name'] . ' ' .  $row['surname'] ?></h5>
+              <p class="card-text"><?php echo "Роль: " . $row['role']; ?></p>
+               <?php
+              if($row['city']!= "")
+              {
+              echo '<p class="card-text">Родной город:'  . $row['city'] . '</p>';
+              }
+              ?>
+              <p class="card-text"><?php echo "Пол: " . $row['gender']; ?></p>
+              <p class="card-text"><?php echo "Дата рождения: " . $row['date_birhday']; ?> </p>
+              <p class="card-text"><?php echo "Дата регистрации: " . $row['date_registration']; ?></p>
             </div>
-          </div>';
+          </div>
+          <?php
         }
     }
 }
@@ -160,5 +194,28 @@ class Database
         $result = mysqli_query($this->connect(), "SELECT * FROM `users` WHERE `$column` = '$values'");
         return mysqli_num_rows($result);
     }
+    function checkUser()
+    {
+        $mylogin = $_SESSION['user']['login'];
+        $connect = mysqli_query($this->connect(), "SELECT * FROM `users` WHERE `login` = '$mylogin'");
+        return $connect;
+    }
 }
 $USER_RIGHTS = new User();
+
+
+/*
+echo '<div class="card" style="width: 18rem;">
+            <div class="card-body">
+            <img src="' . $row['avatar'] . '"style="max-height: 300px;" width="300" class="mb-3" alt="Profile">
+             <h5 class="card-title">' . $row['name'] . ' ' . $row['surname'] . '</h5>
+              <p class="card-text">Логин: ' . $row['login'] . '</p>
+              <p class="card-text">Почта: ' . $row['email'] . '</p>
+              <p class="card-text">Роль: ' . $row['role'] . '</p>
+              <p class="card-text">Родной город: ' . $row['city'] . '</p>
+              <p class="card-text">Пол: ' . $row['gender'] . '</p>
+              <p class="card-text">Дата рождения: ' . $row['date_birhday'] . '</p>
+              <p class="card-text">Дата регистрации: ' . $row['date_registration'] . '</p>
+            </div>
+          </div>';
+        }*/ 

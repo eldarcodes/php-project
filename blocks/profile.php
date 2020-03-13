@@ -1,35 +1,78 @@
 <?php
-include("header.php");
+session_start();
+include_once "../scripts/classes.php";
+$mylogin = $_SESSION['user']['login'];
+$connect = mysqli_query($database->connect(), "SELECT * FROM `users` WHERE `login` = '$mylogin'");
+if(mysqli_num_rows($connect) == 0)
+{
+  unset($_SESSION);
+  header("Location: authorization.php");
+  exit;
+}
+else{
+  include("header.php");
 ?>
-  <section class="profile">
-    <div class="container">
-      <h1 class="profile_user"> Профиль пользователя </h1>
-      <div class="card-inner">
-        <div class="card w-100%">
-          <div class="card-body">
-            <img src="/assets/img/photo_2020-03-12_22-13-50.jpg" width="300" class="mb-3" alt="Profile">
-            <h5 class="card-title"><?php echo $_SESSION['user']['name'] . ' ' . $_SESSION['user']['surname']; ?></h5>
-            <p class="card-text">Ваша почта: <?php echo $_SESSION['user']['email']; ?></p>
-            <p class="card-text">Ваша роль: <?php echo $_SESSION['user']['role']; ?></p>
-            <p class="card-text">Дата регистрации: <?php echo $_SESSION['user']['date']; ?></p>
-            <?php if($_SESSION['user']['city'] != "")
-            {
-              ?>
-              <p class="card-text">Ваш город: <?php echo $_SESSION['user']['city']; ?></p>
-              <?php
-            }
-            ?>
-              <?php if($_SESSION['user']['gender'] != "")
-            {
-              ?>
-              <p class="card-text">Ваш пол: <?php echo $_SESSION['user']['gender']; ?></p>
-              <?php
-            }
-            ?>
-            <a href="editProfile.php" class="btn btn-primary ">Редактировать профиль</a>
-          </div>
+<section class="profile">
+  <div class="container">
+    <h1 class="profile_user"> Профиль пользователя </h1>
+    <div class="card-inner">
+      <div class="card w-100%">
+        <div class="card-body">
+         <?php 
+         $myLogin = $_SESSION['user']['login'];
+         $result = mysqli_query($database->connect(),"SELECT * FROM `users` WHERE `login` = '$myLogin' ");
+         $result = mysqli_fetch_assoc($result);
+         switch($result['lvluser'])
+         {
+           case 1:{
+             $result['role'] = "Пользователь";
+           break;
+           }
+           case 2:{
+            $result['role'] = "Менеджер";
+          break;
+          }
+          case 3:{
+            $result['role'] = "Администратор";
+          break;
+          }
+          case 4:{
+            $result['role'] = "Создатель";
+          break;
+          }
+         }
+         ?>
+         <img src="<?php  
+        echo $result['avatar'];
+         ?>" width="300" style="max-height: 600px;" class="mb-3">
+         <h5 class="card-title"><?php echo $result['name'] . ' ' . $result['surname'] ?></h5>
+         <p class="card-text"><?php echo "Ваша почта: " . $result['email'];?></p>
+         <p class="card-text"><?php echo "Ваша роль: " . $result['role'];?></p>
+         <p class="card-text"><?php echo "Дата регистрации: " . $result['date_registration'];?></p>
+         <?php 
+         if($result['gender'] != "")
+         {
+           echo '<p class="card-text">Ваш пол: ' . $result['gender'] . ' </p>';
+         }
+         ?>
+         <?php 
+         if($result['city'] != "")
+         {
+           echo '<p class="card-text">Ваш город: ' . $result['city'] . ' </p>';
+         }
+         ?>
+         <?php 
+         if($result['date_birhday'] != "")
+         {
+           echo '<p class="card-text">Дата рождения: ' . $result['date_birhday'] . ' </p>';
+         }
+         ?>
+           
+         <a href="editProfile.php" class="btn btn-primary ">Редактировать профиль</a>
         </div>
       </div>
     </div>
-  </section>
-
+  </div>
+</section>
+<?php
+}

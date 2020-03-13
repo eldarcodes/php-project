@@ -2,14 +2,14 @@
 session_start();
 
 include "../scripts/classes.php";
-
+$defaultAvatar = "../assets/img/photo_2020-03-12_22-13-50.jpg";
 $userlogin = $_POST['login'];
 $userpassword = $_POST['password'];
 $useremail = $_POST['email'];
 $username = $_POST['name'];
 $usersurname = $_POST['surname'];
 $confirmpassword = $_POST['confirm_password'];
-$user_register_date = date("d.m.Y");
+$user_register_date = date("Y-m-d");
 
 if ($database->checkData('login', $checklogin) > 0) {
     $_SESSION['message'] = "Этот логин занят";
@@ -26,7 +26,7 @@ if ($database->checkData('login', $checklogin) > 0) {
 } else {
     if ($userpassword !== 0 && $userpassword === $confirmpassword && !empty($userlogin) && !empty($useremail)) {
         $userpassword = md5($userpassword);
-        mysqli_query($database->connect(), "INSERT INTO `users` (`id`, `name`, `surname`, `login`, `email`, `password`, `lvluser`, `date_registration`) VALUES (NULL, '$username', '$usersurname', '$userlogin', '$useremail', '$userpassword', '1' , '$user_register_date')");
+        mysqli_query($database->connect(), "INSERT INTO `users`(`id`, `name`, `surname`, `login`, `email`, `password`, `lvluser`, `date_registration`, `city`, `gender`, `avatar`, `date_birhday`) VALUES (NULL,'$username','$usersurname','$userlogin','$useremail','$userpassword','1','$user_register_date','','','$defaultAvatar','')");
         $_SESSION['message'] = "Вы успешно зарегистрировались";
         header("Location: ../blocks/authorization.php");
     } else {

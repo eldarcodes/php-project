@@ -1,9 +1,14 @@
 <?php
 session_start();
-if ($_SESSION['user']) {
+include_once "../scripts/classes.php";
+$mylogin = $_SESSION['user']['login'];
+$connect = mysqli_query($database->connect(), "SELECT * FROM `users` WHERE `login` = '$mylogin'");
+
+if (mysqli_num_rows($connect) > 0) {
     header("location: profile.php");
     exit();
 }
+else{
 include "header.php";
 ?>
 
@@ -39,4 +44,5 @@ include "header.php";
 </section>
 
 <?php
-include "footer.php"; ?>
+include "footer.php"; 
+        }?>

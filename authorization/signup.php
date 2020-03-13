@@ -11,16 +11,7 @@ if (mysqli_num_rows($checkuser) > 0) {
     $user = mysqli_fetch_assoc($checkuser);
     $_SESSION['user'] = [
         'id' => $user['id'],
-        'name' => $user['name'],
-        'email' => $user['email'],
-        'surname' => $user['surname'],
-        'lvluser' => $user['lvluser'],
         'login' => $user['login'],
-        'date' => $user['date_registration'],
-        'role' => "",
-        'city' => "",
-        'gender' => "",
-        'avatar' => "",
     ];
     switch ($_SESSION['user']['lvluser']) {
         case 1:
