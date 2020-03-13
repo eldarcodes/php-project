@@ -11,7 +11,8 @@ if (isset($_POST['addNewPost'])) {
         $_SESSION['error'] = 'Введите текст во все поля!';
         header('location: addNewPost.php');
     } else {
-        $result = mysqli_query($database->connect(), "INSERT INTO `posts`(`id`, `creator`,`title`, `subtitle`, `likes`, `image`) VALUES (0,'$id','$getTitle','$getsubTitle',0,0)");
+        $today = date("Y-m-d H:i:s");
+        $result = mysqli_query($database->connect(), "INSERT INTO `posts`(`id`, `creator`,`title`, `subtitle`, `likes`, `image`, `date`) VALUES (0,'$id','$getTitle','$getsubTitle',0,0, '$today')");
         header('location: addNewPost.php');
         $_SESSION['error'] = 'Запись успешно создана!';
     }

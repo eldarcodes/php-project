@@ -7,7 +7,8 @@ while ($res = mysqli_fetch_assoc($row)) {
 ?>
     <div class="jumbotron bg-light card">
         <h1 class="display-4"><?php echo $res['title']; ?></h1>
-        <p class="lead"><?php echo $username['name']; ?></p>
+        <p class="lead"><?php echo $username['name'] . ' '  .   $username['surname']; ?></p>
+        <p class="font-italic font-weight-light"><?php echo $res['date']; ?></p>
         <?php
         $sessionId = $_SESSION['user']['id'];
         $connecttoUsers = mysqli_query($database->connect(), "SELECT * FROM `users` WHERE `id` = '$sessionId' ");
