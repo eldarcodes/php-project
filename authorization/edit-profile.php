@@ -18,7 +18,7 @@ if ($_FILES['profile-image']['name'] == '') {
     $result = mysqli_fetch_assoc($connect);
     $path = $result['avatar'];
 } else {
-    $path = "../assets/img" . time() .  $_FILES['profile-image']['name'];
+    $path = "../assets/img/" . time() .  $_FILES['profile-image']['name'];
     move_uploaded_file($_FILES['profile-image']['tmp_name'], $path);
 }
 
