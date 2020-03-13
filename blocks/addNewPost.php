@@ -18,11 +18,11 @@ require_once "../scripts/classes.php";
 
             <div class="form-group">
                 <label>Название поста</label>
-                <input type="text" class="form-control" name="title">
+                <input autocomplete="off" type="text" class="form-control" name="title">
             </div>
             <div class="form-group">
                 <label>Текст поста</label>
-                <input type="text" class="form-control" name="subtitle">
+                <input autocomplete="off" type="text" class="form-control" name="subtitle">
             </div>
 
             <button name='addNewPost' class="bg-primary text-center btn text-white post-button">
