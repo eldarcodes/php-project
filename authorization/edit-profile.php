@@ -15,8 +15,7 @@ $login =  $_SESSION['user']['login'];
 
 
 if ($_FILES['profile-image']['name'] == '') {
-    $myLogin = $_SESSION['user']['login'];
-    $connect = mysqli_query($database->connect(), "SELECT * FROM `users` WHERE `login` = '$myLogin' ");
+   -+-
     $result = mysqli_fetch_assoc($connect);
     $path = $result['avatar'];
 } else {

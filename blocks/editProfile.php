@@ -12,7 +12,7 @@ if ($database->checkData('login', $_SESSION['user']['login']) == 0 || !$_SESSION
         <div class="container">
             <h1 class="profile_user"> Профиль пользователя </h1>
             <div class="card-inner">
-                <div class="card w-100%">
+                <div class="shadow p-3 mb-5 bg-white rounded w-100%">
                     <div class="card-body">
                         <form action="../authorization/edit-profile.php" method="POST" enctype="multipart/form-data">
                             <img src="<?php if (isset($result['avatar'])) {
@@ -41,9 +41,15 @@ if ($database->checkData('login', $_SESSION['user']['login']) == 0 || !$_SESSION
                             <div class="card-text mb-3 row d-flex align-items-center">
                                 <div class="col-2">Пол:</div>
                                 <select class="custom-select col-3" name="selected">
-                                <option value="" <?php if($result['gender'] == ""){echo "selected";}?>>Не выбрано </option>
-                                    <option value="Мужской" <?php if($result['gender'] == "Мужской"){echo "selected";}?>>Мужской</option>
-                                    <option value="Женский" <?php if($result['gender'] == "Женский"){echo "selected";}?>>Женский</option>
+                                    <option value="" <?php if ($result['gender'] == "") {
+                                                            echo "selected";
+                                                        } ?>>Не выбрано </option>
+                                    <option value="Мужской" <?php if ($result['gender'] == "Мужской") {
+                                                                echo "selected";
+                                                            } ?>>Мужской</option>
+                                    <option value="Женский" <?php if ($result['gender'] == "Женский") {
+                                                                echo "selected";
+                                                            } ?>>Женский</option>
                                 </select>
                             </div>
                             <div class="card-text mb-3 row d-flex align-items-center">
