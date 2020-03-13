@@ -1,4 +1,13 @@
 <?php session_start();
+require_once '../scripts/classes.php';
+if (!$_SESSION['user']) {
+    header('location: authorization.php');
+}
+$row = $database->checkUser();
+if ($row['lvluser'] < 3) {
+    header('location: index.php');
+}
+
 include "header.php";
 require_once "../scripts/classes.php";
 
