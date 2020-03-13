@@ -1,8 +1,8 @@
 <?php
-$row = mysqli_query($database->connect(), " SELECT * FROM `posts` ");
+$row = mysqli_query($database->connect(), " SELECT * FROM `posts` ORDER BY `id` DESC");
 while ($res = mysqli_fetch_assoc($row)) {
     $idd = $res['creator'];
-    $connecttoUsers = mysqli_query($database->connect(), "SELECT * FROM `users` WHERE `id` = '$idd'");
+    $connecttoUsers = mysqli_query($database->connect(), "SELECT * FROM `users` WHERE `id` = '$idd' ");
     $username = mysqli_fetch_assoc($connecttoUsers);
 ?>  <div class="jumbotron bg-light card">
         <h1 class="display-4"><?php echo $res['title']; ?></h1>
