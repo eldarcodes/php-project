@@ -41,10 +41,9 @@ if ($database->checkData('login', $_SESSION['user']['login']) == 0 || !$_SESSION
                             <div class="card-text mb-3 row d-flex align-items-center">
                                 <div class="col-2">Пол:</div>
                                 <select class="custom-select col-3" name="selected">
-                                    <option value="Мужской">Мужской</option>
-                                    <option <?php if ($result['gender'] == "Женский") {
-                                                echo "selected";
-                                            } ?> value="Женский">Женский</option>
+                                <option value="" <?php if($result['gender'] == ""){echo "selected";}?>>Не выбрано </option>
+                                    <option value="Мужской" <?php if($result['gender'] == "Мужской"){echo "selected";}?>>Мужской</option>
+                                    <option value="Женский" <?php if($result['gender'] == "Женский"){echo "selected";}?>>Женский</option>
                                 </select>
                             </div>
                             <div class="card-text mb-3 row d-flex align-items-center">
