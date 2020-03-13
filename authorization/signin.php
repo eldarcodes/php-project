@@ -11,7 +11,7 @@ $usersurname = $_POST['surname'];
 $confirmpassword = $_POST['confirm_password'];
 $user_register_date = date("Y-m-d");
 
-if ($database->checkData('login', $checklogin) > 0) {
+if ($database->checkData('login', $userlogin) > 0) {
     $_SESSION['message'] = "Этот логин занят";
     $_SESSION['returnname'] = $username;
     $_SESSION['returnsurname'] = $usersurname;
