@@ -5,9 +5,10 @@ if ($_SESSION['user']) {
     exit();
 }
 include "header.php"; ?>
-<section class="form-auth">
-    <div class="form-auth-inner">
-        <?php  ?>
+<section class="form-auth flex-column">
+
+    <div class="form-auth-inner shadow pt-4 pl-5 pr-5 bg-white rounded">
+        <h3>Регистрация</h3>
         <form action="../authorization/signin.php" method="POST">
             <div class="form-group">
                 <label>Введите ваше имя</label>
@@ -43,7 +44,10 @@ include "header.php"; ?>
                 <div class="form-group">
                     <label>Подтвердите пароль</label>
                     <input type="password" class="form-control" name="confirm_password">
-                    <button type="submit" class="btn btn-outline-primary register">Зарегистрироваться</button>
+
+                    <button class="text-center bg-primary mt-3 btn text-white reg-button">
+                        Зарегистрироваться
+                    </button>
         </form>
     </div>
     <div class="message">

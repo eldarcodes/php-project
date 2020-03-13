@@ -7,13 +7,11 @@ $editSurname = $_POST['surname'];
 $editEmail = $_POST['email'];
 $editCity = $_POST['city'];
 $editGender = $_POST['selected'];
-if($editGender != "Мужской" && $editGender != "Женский")
-{
+if ($editGender != "Мужской" && $editGender != "Женский") {
     $editGender = "";
 }
 $editDate = $_POST['date'];
 $login =  $_SESSION['user']['login'];
-
 
 
 if ($_FILES['profile-image']['name'] == '') {

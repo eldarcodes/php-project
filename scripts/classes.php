@@ -63,43 +63,37 @@ class Admin extends User
                     $row['role'] = "Создатель";
                     break;
             }
-            ?>
+?>
             <div class="card" style="width: 18rem;">
-            <div class="card-body">
-            <img src="<?php echo $row['avatar'];?>"style="max-height: 300px;" width="200px" height="200px" class="mb-3" alt="Profile">
-             <h5 class="card-title"><?php echo $row['name'] . ' ' .  $row['surname'] ?></h5>
-              <p class="card-text"><?php echo "Роль: " . $row['role']; ?></p>
-               <?php
-              if($row['city']!= "")
-              {
-              echo '<p class="card-text">Родной город:'  . $row['city'] . '</p>';
-              }
-              else{
-                echo '<p class="card-text">Родной город: не указан </p>';
-              }
-              ?>
-              <p class="card-text"><?php
-              if($row['gender']!= "")
-              {
-              echo '<p class="card-text">Пол:'  . $row['gender'] . '</p>';
-              }
-              else{
-                echo '<p class="card-text">Пол: не указан </p>';
-              }
-              ?></p>
-              <p class="card-text"><?php
-              if($row['date_birhday']!= "")
-              {
-              echo '<p class="card-text">Дата рождения:'  . $row['date_birhday'] . '</p>';
-              }
-              else{
-                echo '<p class="card-text">Дата рождения: не указана </p>';
-              }
-              ?> </p>
-              <p class="card-text"><?php echo "Дата регистрации: " . $row['date_registration']; ?></p>
+                <div class="card-body">
+                    <img src="<?php echo $row['avatar']; ?>" style="max-height: 300px;" width="200px" height="200px" class="mb-3" alt="Profile">
+                    <h5 class="card-title"><?php echo $row['name'] . ' ' .  $row['surname'] ?></h5>
+                    <p class="card-text"><?php echo "Роль: " . $row['role']; ?></p>
+                    <?php
+                    if ($row['city'] != "") {
+                        echo '<p class="card-text">Родной город:'  . $row['city'] . '</p>';
+                    } else {
+                        echo '<p class="card-text">Родной город: не указан </p>';
+                    }
+                    ?>
+                    <p class="card-text"><?php
+                                            if ($row['gender'] != "") {
+                                                echo '<p class="card-text">Пол:'  . $row['gender'] . '</p>';
+                                            } else {
+                                                echo '<p class="card-text">Пол: не указан </p>';
+                                            }
+                                            ?></p>
+                    <p class="card-text"><?php
+                                            if ($row['date_birhday'] != "") {
+                                                echo '<p class="card-text">Дата рождения:'  . $row['date_birhday'] . '</p>';
+                                            } else {
+                                                echo '<p class="card-text">Дата рождения: не указана </p>';
+                                            }
+                                            ?> </p>
+                    <p class="card-text"><?php echo "Дата регистрации: " . $row['date_registration']; ?></p>
+                </div>
             </div>
-          </div>
-          <?php
+        <?php
         }
     }
 }
@@ -127,45 +121,41 @@ class Creator extends User
                     $row['role'] = "Создатель";
                     break;
             }
-            ?>
+        ?>
             <div class="card" style="width: 18rem;">
-            <div class="card-body">
-            <img src="<?php echo $row['avatar'] ?>"style="max-height: 300px;" width="200px" height="200px" class="mb-3" alt="Profile">
-             <h5 class="card-title"><?php echo $row['name'] . ' ' .  $row['surname'] ?></h5>
-              <p class="card-text"><?php echo "Логин: " . $row['login']; ?> <p
-              <p class="card-text"><?php echo "Почта: " . $row['email']; ?></p>
-              <p class="card-text"><?php echo "Роль: " . $row['role']; ?></p>
-               <?php
-              if($row['city']!= "")
-              {
-              echo '<p class="card-text">Родной город:'  . $row['city'] . '</p>';
-              }
-              else{
-                echo '<p class="card-text">Родной город: не указан </p>';
-              }
-              ?>
-              <p class="card-text"><?php
-              if($row['gender']!= "")
-              {
-              echo '<p class="card-text">Пол:'  . $row['gender'] . '</p>';
-              }
-              else{
-                echo '<p class="card-text">Пол: не указан </p>';
-              }
-              ?></p>
-              <p class="card-text"><?php
-              if($row['date_birhday']!= "")
-              {
-              echo '<p class="card-text">Дата рождения:'  . $row['date_birhday'] . '</p>';
-              }
-              else{
-                echo '<p class="card-text">Дата рождения: не указана </p>';
-              }
-              ?> </p>
-              <p class="card-text"><?php echo "Дата регистрации: " . $row['date_registration']; ?></p>
+                <div class="card-body">
+                    <div class="text-center">
+                        <img src="<?php echo $row['avatar'] ?>" style="max-height: 300px;" width="200px" height="200px" class="mb-3" alt="Profile">
+                    </div>
+                    <hr>
+                    <h5 class="card-title"><?php echo $row['name'] . ' ' .  $row['surname'] ?></h5>
+                    <p class="card-text"><?php echo "Логин: " . $row['login']; ?> <p <p class="card-text"><?php echo "Почта: " . $row['email']; ?></p>
+                        <p class="card-text"><?php echo "Роль: " . $row['role']; ?></p>
+                        <?php
+                        if ($row['city'] != "") {
+                            echo '<p class="card-text">Родной город:'  . $row['city'] . '</p>';
+                        } else {
+                            echo '<p class="card-text">Родной город: не указан </p>';
+                        }
+                        ?>
+                        <p class="card-text"><?php
+                                                if ($row['gender'] != "") {
+                                                    echo '<p class="card-text">Пол:'  . $row['gender'] . '</p>';
+                                                } else {
+                                                    echo '<p class="card-text">Пол: не указан </p>';
+                                                }
+                                                ?></p>
+                        <p class="card-text"><?php
+                                                if ($row['date_birhday'] != "") {
+                                                    echo '<p class="card-text">Дата рождения:'  . $row['date_birhday'] . '</p>';
+                                                } else {
+                                                    echo '<p class="card-text">Дата рождения: не указана </p>';
+                                                }
+                                                ?> </p>
+                        <p class="card-text"><?php echo "Дата регистрации: " . $row['date_registration']; ?></p>
+                </div>
             </div>
-          </div>
-          <?php
+        <?php
         }
     }
 }
@@ -191,34 +181,30 @@ class Manager extends User
                     $row['role'] = "Создатель";
                     break;
             }
-            ?>
+        ?>
             <div class="card" style="width: 18rem;">
-            <div class="card-body">
-            <img src="<?php echo $row['avatar'] ?>"style="max-height: 300px;" width="200px" height="200px" class="mb-3" alt="Profile">
-             <h5 class="card-title"><?php echo $row['name'] . ' ' .  $row['surname'] ?></h5>
-              <p class="card-text"><?php echo "Роль: " . $row['role']; ?></p>
-              <p class="card-text"><?php
-              if($row['gender']!= "")
-              {
-              echo '<p class="card-text">Пол :'  . $row['gender'] . '</p>';
-              }
-              else{
-                echo '<p class="card-text">Пол : не указан </p>';
-              }
-              ?></p>
-              <p class="card-text"><?php
-              if($row['date_birhday']!= "")
-              {
-              echo '<p class="card-text">Дата рождения :'  . $row['date_birhday'] . '</p>';
-              }
-              else{
-                echo '<p class="card-text">Дата рождения : не указана </p>';
-              }
-              ?> </p>
-              <p class="card-text"><?php echo "Дата регистрации : " . $row['date_registration']; ?></p>
+                <div class="card-body">
+                    <img src="<?php echo $row['avatar'] ?>" style="max-height: 300px;" width="200px" height="200px" class="mb-3" alt="Profile">
+                    <h5 class="card-title"><?php echo $row['name'] . ' ' .  $row['surname'] ?></h5>
+                    <p class="card-text"><?php echo "Роль: " . $row['role']; ?></p>
+                    <p class="card-text"><?php
+                                            if ($row['gender'] != "") {
+                                                echo '<p class="card-text">Пол :'  . $row['gender'] . '</p>';
+                                            } else {
+                                                echo '<p class="card-text">Пол : не указан </p>';
+                                            }
+                                            ?></p>
+                    <p class="card-text"><?php
+                                            if ($row['date_birhday'] != "") {
+                                                echo '<p class="card-text">Дата рождения :'  . $row['date_birhday'] . '</p>';
+                                            } else {
+                                                echo '<p class="card-text">Дата рождения : не указана </p>';
+                                            }
+                                            ?> </p>
+                    <p class="card-text"><?php echo "Дата регистрации : " . $row['date_registration']; ?></p>
+                </div>
             </div>
-          </div>
-          <?php
+<?php
         }
     }
 }
@@ -266,4 +252,4 @@ echo '<div class="card" style="width: 18rem;">
               <p class="card-text">Дата регистрации: ' . $row['date_registration'] . '</p>
             </div>
           </div>';
-        }*/ 
+        }*/
