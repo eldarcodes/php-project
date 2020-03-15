@@ -12,7 +12,7 @@ if (isset($_POST['addNewPost'])) {
         echo ($_SESSION['errorpost']);
     } else {
         $today = date("Y-m-d H:i:s");
-        $result = mysqli_query($database->connect(), "INSERT INTO `posts`(`id`, `creator`,`title`, `subtitle`, `likes`, `image`, `date`, `id_Liker`, `activeLike`) VALUES (0,'$id','$getTitle','$getsubTitle',0,0, '$today',0,0)");
+        $result = mysqli_query($database->connect(), "INSERT INTO `posts`(`id`, `creator`,`title`, `subtitle`, `likes`, `image`, `date`) VALUES (0,'$id','$getTitle','$getsubTitle',0,0, '$today')");
         $_SESSION['errorpost'] = 'Запись успешно создана!';
         echo ($_SESSION['errorpost']);
     }
