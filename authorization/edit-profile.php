@@ -2,6 +2,10 @@
 session_start();
 require "../scripts/classes.php";
 
+
+
+header("location: ../blocks/profile.php");
+
 $editName = $_POST['name'];
 $editSurname = $_POST['surname'];
 $editEmail = $_POST['email'];
@@ -15,8 +19,8 @@ $login =  $_SESSION['user']['login'];
 
 
 if ($_FILES['profile-image']['name'] == '') {
-   -+-
-    $result = mysqli_fetch_assoc($connect);
+    $connecttion = mysqli_query($database->connect(), "SELECT * FROM `users` ");
+    $result = mysqli_fetch_assoc($connecttion);
     $path = $result['avatar'];
 } else {
     $path = "../assets/img/" . time() .  $_FILES['profile-image']['name'];
@@ -30,5 +34,4 @@ $query = mysqli_query($database->connect(), "UPDATE `users` SET `name` = '$editN
 $_SESSION['user']['name'] = $editName;
 $_SESSION['user']['surname'] = $editSurname;
 
-header("location: ../blocks/profile.php");
 exit;

@@ -14,9 +14,10 @@ if ($userInfo['password'] == md5($getOldPassword) && !empty($getNewPassword) && 
     $myLogin = $_SESSION['user']['login'];
     mysqli_query($database->connect(), "UPDATE `users` SET `password` = '$md5NewPassword' WHERE `login` = '$myLogin'");
     $_SESSION['error'] = 'Пароль успешно изменен!';
+    echo $_SESSION['error'];
 } else {
     $_SESSION['error'] = 'Что-то пошло не так';
+    echo $_SESSION['error'];
 }
 
 
-header('location: profileSettings.php');

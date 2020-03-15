@@ -14,34 +14,47 @@ require_once "../scripts/classes.php";
 ?>
 <section class="form-auth flex-column">
     <div class="form-auth-inner shadow p-4 bg-white rounded">
-        <form action="sendNewPost.php" method="post">
+        <form method="post">
 
             <div class="form-group">
                 <label>Название поста</label>
-                <input autocomplete="off" type="text" class="form-control" name="title">
+                <input autocomplete="off" type="text" class="form-control" id="title" name="title">
             </div>
             <div class="form-group">
                 <label>Текст поста</label>
-                <input autocomplete="off" type="text" class="form-control" name="subtitle">
+                <input autocomplete="off" type="text" class="form-control" id="subtitle" name="subtitle">
             </div>
 
-            <button name='addNewPost' class="bg-primary text-center btn text-white post-button">
+            <button id="addNewPost" name='addNewPost' class="bg-primary text-center btn text-white post-button">
                 Подтвердить
             </button>
 
         </form>
         <div class="message">
-            <?php
-            if (isset($_SESSION['error'])) {
-            ?>
-                <h6 class="text-center mt-3"><?php echo $_SESSION['error']; ?> </h6>
-
-            <?php unset($_SESSION['error']);
-            }
-            ?>
+        <h6 id="errormessage" class="text-center mt-3"></h6>
         </div>
     </div>
 </section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+$("#addNewPost").on('click',function(e)
+{
+    var title = $("#title").val();
+    var subtitle = $("#subtitle").val();
+    var addNewPost = $("#addNewPost").val();
+    e.preventDefault();
+    $.post("sendNewPost.php",
+    {
+        "title": title,
+        "subtitle": subtitle,
+        "addNewPost":addNewPost,
+    },function(data)
+    {
+        $("#errormessage").html(data);
+    })
+});
+</script>
 <?php
 
 
