@@ -44,7 +44,7 @@ $result = mysqli_fetch_assoc($connect);
                         <h5 class="my-0 mr-md-auto font-weight-normal"><a href="../blocks/index.php" class="text-dark logo"><?php echo $result['name'] . '  ' . $result['surname']; ?></a></h5>
                         <?php $USER_RIGHTS->drawPanel(); ?>
                         <a href="../blocks/profileSettings.php">
-                            <img src="../assets/profile/settings.svg" width="25" class="mr-4" />
+                            <img src="../assets/profile/settings.svg" width="25" class="mr-3" />
                         </a>
 
                         <a class="btn btn-outline-primary mr-3" href="../blocks/profile.php">Профиль</a>

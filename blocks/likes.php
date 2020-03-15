@@ -22,10 +22,10 @@ $newInformationLike = mysqli_fetch_assoc($newInfoLikes);
 
 if ($newInformationLike['likeClicked'] % 2 == 0) {
     $likeClickedPlus =  mysqli_query($database->connect(), "UPDATE `checklikes` SET `ActiveLike` = '1' WHERE `IDPOST` = '$idButton' AND `IDLIKER` = '$id'");
-    $response['img'] = '../assets/posts/heart_active.png';
+    $response['img'] = 'red';
 } else {
     $likeClickedPlus =  mysqli_query($database->connect(), "UPDATE `checklikes` SET `ActiveLike` = '0' WHERE `IDPOST` = '$idButton' AND `IDLIKER` = '$id'");
-    $response['img'] = '../assets/posts/heart.png';
+    $response['img'] = '';
 }
 
 $checkLikesInfo = mysqli_query($database->connect(), "SELECT * FROM `checklikes` WHERE `IDPOST` = '$idButton' AND `ActiveLike` = '1'");
