@@ -43,8 +43,31 @@ while ($res = mysqli_fetch_assoc($row)) {
 
         <hr class="my-4">
         <p><?php echo $res['subtitle'] ?></p>
-        <div class="text-right">
+        <div class="d-flex justify-content-between">
+            <div class="d-flex align-items-center">
+                <button name="<?php echo $res['id'] ?>" id="like-button" class="btn p-1">
+                    <img src="../assets/posts/heart.png" width="30" alt="">
+                </button>
+                <span id="likes-count" class="ml-3"><?php echo $res['likes'] ?></span>
+            </div>
             <a class="btn btn-primary btn-lg" href="#" role="button">Читать дальше</a>
         </div>
     </div><?php
         }
+            ?>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    let test = document.querySelectorAll('#like-button');
+    let likesCount = document.querySelectorAll('#likes-count');
+
+    for (let i = 0; i < test.length; i++) {
+        test[i].onclick = () => {
+
+            $.post("likes.php", {
+                "postId": test[i].getAttribute("name"),
+            }, function(data) {
+                likesCount[i].innerText = data;
+            })
+        }
+    }
+</script>

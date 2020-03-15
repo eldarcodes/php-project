@@ -31,29 +31,26 @@ require_once "../scripts/classes.php";
 
         </form>
         <div class="message">
-        <h6 id="errormessage" class="text-center mt-3"></h6>
+            <h6 id="errormessage" class="text-center mt-3"></h6>
         </div>
     </div>
 </section>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
-$("#addNewPost").on('click',function(e)
-{
-    var title = $("#title").val();
-    var subtitle = $("#subtitle").val();
-    var addNewPost = $("#addNewPost").val();
-    e.preventDefault();
-    $.post("sendNewPost.php",
-    {
-        "title": title,
-        "subtitle": subtitle,
-        "addNewPost":addNewPost,
-    },function(data)
-    {
-        $("#errormessage").html(data);
-    })
-});
+    $("#addNewPost").on('click', function(e) {
+        var title = $("#title").val();
+        var subtitle = $("#subtitle").val();
+        var addNewPost = $("#addNewPost").val();
+        e.preventDefault();
+        $.post("sendNewPost.php", {
+            "title": title,
+            "subtitle": subtitle,
+            "addNewPost": addNewPost,
+        }, function(data) {
+            $("#errormessage").html(data);
+        })
+    });
 </script>
 <?php
 
