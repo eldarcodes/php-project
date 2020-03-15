@@ -50,6 +50,9 @@ require_once "../scripts/classes.php";
         }, function(data) {
             $("#errormessage").html(data);
         })
+
+        $("#title").val("");
+        $("#subtitle").val("");
     });
 </script>
 <?php

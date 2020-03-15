@@ -24,6 +24,7 @@ while ($res = mysqli_fetch_assoc($row)) {
 
                 $id = $username['id'];
                 $id2 = $res['id'];
+                mysqli_query($database->connect(), "DELETE FROM `checklikes` WHERE `IDPOST` = '$id'");
                 mysqli_query($database->connect(), "DELETE FROM `posts` WHERE `creator` = '$id' AND `id` = '$id2'");
                 echo "<script>document.location.replace('index.php'); </script>";
                 exit();
@@ -35,6 +36,7 @@ while ($res = mysqli_fetch_assoc($row)) {
         </button></form>';
             if (isset($_POST[$res['id']])) {
                 $id = $res['id'];
+                mysqli_query($database->connect(), "DELETE FROM `checklikes` WHERE `IDPOST` = '$id'");
                 mysqli_query($database->connect(), "DELETE FROM `posts` WHERE `id` = '$id'");
                 echo "<script>document.location.replace('index.php');</script>";
             }
@@ -44,8 +46,8 @@ while ($res = mysqli_fetch_assoc($row)) {
         <hr class="my-4">
         <p><?php echo $res['subtitle'] ?></p>
         <div class="d-flex justify-content-between">
-        <?php
-        if (isset($_SESSION['user'])) : ?>
+            <?php
+            if (isset($_SESSION['user'])) : ?>
                 <div class="d-flex align-items-center">
                     <button name="<?php echo $res['id'] ?>" id="like-button" class="btn p-1">
                         <img id="heart" src="<?php $id = $_SESSION['user']['id'];
@@ -63,12 +65,12 @@ while ($res = mysqli_fetch_assoc($row)) {
                     </button>
                     <span id="likes-count" class="ml-3"><?php echo $res['likes'] ?></span>
                 </div>
-            
-        <?php endif;
+
+            <?php endif;
 
 
-        ?>
-        <a class="btn btn-primary btn-lg" href="#" role="button">Читать дальше</a>
+            ?>
+            <a class="btn btn-primary btn-lg" href="#" role="button">Читать дальше</a>
         </div>
     </div><?php
         }
