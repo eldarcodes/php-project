@@ -11,7 +11,7 @@ if (mysqli_num_rows($connect) > 0) {
     include "header.php";
 ?>
 
-    <section class="form-auth flex-column">
+    <section class="form-auth flex-column" style="height: 80vh;">
         <div class="form-auth-inner shadow p-4 bg-white rounded">
             <form action="../authorization/signup.php" method="post">
                 <div class="form-group">
@@ -22,7 +22,7 @@ if (mysqli_num_rows($connect) > 0) {
                     <label>Пароль</label>
                     <input type="password" class="form-control" name="password">
                 </div>
-                <button class="bg-primary text-center btn text-white auth-button">
+                <button class="bg-primary text-center btn text-white btn-block">
                     Войти
                 </button>
             </form>
@@ -38,7 +38,7 @@ if (mysqli_num_rows($connect) > 0) {
         </div>
         <div class="registration shadow bg-white rounded text-dark">
             <p>Нет аккаунта? </p>
-            <a type="submit" class="text-primary" href="../blocks/register.php"> Зарегистрироваться</a>
+            <a type="submit" class="text-primary" href="../blocks/register.php">Зарегистрироваться</a>
         </div>
 
     </section>

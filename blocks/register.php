@@ -5,9 +5,9 @@ if ($_SESSION['user']) {
     exit();
 }
 include "header.php"; ?>
-<section class="form-auth flex-column">
+<section class="form-auth mt-5 flex-column">
 
-    <div class="form-auth-inner shadow pt-4 pl-5 pr-5 bg-white rounded">
+    <div class="form-auth-inner shadow p-5 bg-white rounded">
         <h3>Регистрация</h3>
         <form method="POST">
             <div class="form-group">
@@ -24,9 +24,9 @@ include "header.php"; ?>
                                     echo $_SESSION['returnsurname'];
                                     unset($_SESSION['returnsurname']);
                                 }  ?>" type="text" class="form-control" id="surname" name="surname">
-                                <small class="alert2 form-text text-muted p-0"></small>
+                <small class="alert2 form-text text-muted p-0"></small>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-4">
                 <label>Введите логин</label>
                 <input value="<?php if (isset($_SESSION['returnlogin'])) {
                                     echo $_SESSION['returnlogin'];
@@ -34,24 +34,26 @@ include "header.php"; ?>
                                 }  ?>" type="text" class="form-control" id="login" name="login">
 
             </div>
-            <div class="form-group">
+            <div class="form-group mb-4">
                 <label>Введите вашу почту</label>
                 <input value="<?php if (isset($_SESSION['returnemail'])) {
                                     echo $_SESSION['returnemail'];
                                     unset($_SESSION['returnemail']);
                                 }  ?>" type="email" class="form-control" id="email" name="email">
-                <div class="form-group">
-                    <label>Введите пароль</label>
-                    <input type="password" class="form-control" id="password" name="password">
-                    <small class="alert3 form-text text-muted p-0"></small>
-                </div>
-                <div class="form-group">
-                    <label>Подтвердите пароль</label>
-                    <input type="password" class="form-control" id="confirm_password" name="confirm_password">
-                    <small class="alert4 form-text text-muted p-0"></small>
-                    <button id="signin" class="text-center bg-primary mt-3 btn text-white reg-button">
-                        Зарегистрироваться
-                    </button>
+            </div>
+            <div class="form-group">
+                <label>Введите пароль</label>
+                <input type="password" class="form-control" id="password" name="password">
+                <small class="alert3 form-text text-muted p-0"></small>
+            </div>
+            <div class="form-group">
+                <label>Подтвердите пароль</label>
+                <input type="password" class="form-control" id="confirm_password" name="confirm_password">
+                <small class="alert4 form-text text-muted p-0"></small>
+            </div>
+            <button id="signin" class="text-center bg-primary mt-3 btn text-white btn-block">
+                Зарегистрироваться
+            </button>
         </form>
     </div>
     <div class="message">

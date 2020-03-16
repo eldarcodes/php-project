@@ -12,8 +12,8 @@ include "header.php";
 require_once "../scripts/classes.php";
 
 ?>
-<section class="form-auth flex-column">
-    <div class="form-auth-inner shadow p-4 bg-white rounded">
+<section class="form-auth flex-column" style="height: 80vh;">
+    <div style="width: 700px;" class="form-auth-inner shadow p-4 bg-white rounded">
         <form method="post">
 
             <div class="form-group">
@@ -22,10 +22,10 @@ require_once "../scripts/classes.php";
             </div>
             <div class="form-group">
                 <label>Текст поста</label>
-                <input autocomplete="off" type="text" class="form-control" id="subtitle" name="subtitle">
+                <textarea style="height: 300px; resize:none;" autocomplete="off" type="text" class="form-control" id="subtitle" name="subtitle"></textarea>
             </div>
 
-            <button id="addNewPost" name='addNewPost' class="bg-primary text-center btn text-white post-button">
+            <button id="addNewPost" name='addNewPost' class="bg-primary text-center btn text-white btn-block">
                 Подтвердить
             </button>
 

@@ -4,7 +4,7 @@ include_once "../scripts/classes.php";
 
 include("header.php");
 ?>
-<section class="form-auth flex-column">
+<section class="form-auth flex-column" style="height: 80vh;"> 
     <div class="form-auth-inner shadow p-4 bg-white rounded">
         <form  method="post">
             <div class="form-group">
