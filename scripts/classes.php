@@ -36,7 +36,7 @@ class User extends Database
             case 4: {
                     $_SESSION['user']['lvluser'] = $row['lvluser'];
                     $_SESSION['user']['role'] = "Создатель";
-                    echo ' <a class="btn btn-outline-primary mr-3" href="../admin/creator-panel.php">Панель создателя</a>';
+                    echo ' <a href="../admin/creator-panel.php"" class="btn btn-outline-primary mr-3" href="../admin/creator-panel.php">Панель создателя</a>';
                     break;
                 }
         }

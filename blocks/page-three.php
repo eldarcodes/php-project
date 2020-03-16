@@ -1,0 +1,1 @@
+<?php echo '<div> <h1 style="text-align:center" > ТРЕТЬЯ СТРАНИЦА </h1>';
