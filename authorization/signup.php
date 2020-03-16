@@ -27,21 +27,16 @@ if (mysqli_num_rows($checkuser) > 0) {
             $_SESSION['user']['role'] = "Создатель";
             break;
     }
-    header("Location: ../blocks/index.php");
-    exit();
+    echo $_SESSION['message'] = "Авторизован!";
 } else {
     if ($database->checkData('login', $login) === 0) {
         $_SESSION['message'] = "Пользователя не существует!";
-        header("location: ../blocks/authorization.php");
+        echo $_SESSION['message'];
         exit;
     }
     if ($database->checkData('password', $password) === 0) {
         $_SESSION['message'] = "Вы ввели неверный пароль!";
-        header("location: ../blocks/authorization.php");
+        echo $_SESSION['message'];
         exit;
-    } else {
-        $_SESSION['message'] = "Авторизация не удалась!";
-        header("location: ../blocks/authorization.php");
-        exit;
-    }
+    } 
 }

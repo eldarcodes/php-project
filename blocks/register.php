@@ -5,7 +5,7 @@ if ($_SESSION['user']) {
     exit();
 }
 include "header.php"; ?>
-<section class="form-auth mt-5 flex-column">
+<section class="form-auth flex-column">
 
     <div class="form-auth-inner shadow p-5 bg-white rounded">
         <h3>Регистрация</h3>
@@ -16,7 +16,7 @@ include "header.php"; ?>
                                                                     echo $_SESSION['returnname'];
                                                                     unset($_SESSION['returnname']);
                                                                 }  ?>" type="text" class="form-control error" id="name" name="name">
-                <small class="alert1 form-text text-muted p-0"></small>
+                <small id="test" class="alert1 form-text text-muted p-0"></small>
             </div>
             <div class="form-group">
                 <label>Введите вашу фамилию</label>
@@ -26,7 +26,7 @@ include "header.php"; ?>
                                 }  ?>" type="text" class="form-control" id="surname" name="surname">
                 <small class="alert2 form-text text-muted p-0"></small>
             </div>
-            <div class="form-group mb-4">
+            <div class="form-group">
                 <label>Введите логин</label>
                 <input value="<?php if (isset($_SESSION['returnlogin'])) {
                                     echo $_SESSION['returnlogin'];
@@ -34,26 +34,24 @@ include "header.php"; ?>
                                 }  ?>" type="text" class="form-control" id="login" name="login">
 
             </div>
-            <div class="form-group mb-4">
+            <div class="form-group">
                 <label>Введите вашу почту</label>
                 <input value="<?php if (isset($_SESSION['returnemail'])) {
                                     echo $_SESSION['returnemail'];
                                     unset($_SESSION['returnemail']);
                                 }  ?>" type="email" class="form-control" id="email" name="email">
-            </div>
-            <div class="form-group">
-                <label>Введите пароль</label>
-                <input type="password" class="form-control" id="password" name="password">
-                <small class="alert3 form-text text-muted p-0"></small>
-            </div>
-            <div class="form-group">
-                <label>Подтвердите пароль</label>
-                <input type="password" class="form-control" id="confirm_password" name="confirm_password">
-                <small class="alert4 form-text text-muted p-0"></small>
-            </div>
-            <button id="signin" class="text-center bg-primary mt-3 btn text-white btn-block">
-                Зарегистрироваться
-            </button>
+                <div class="form-group">
+                    <label>Введите пароль</label>
+                    <input type="password" class="form-control" id="password" name="password">
+                    <small class="alert3 form-text text-muted p-0"></small>
+                </div>
+                <div class="form-group">
+                    <label>Подтвердите пароль</label>
+                    <input type="password" class="form-control" id="confirm_password" name="confirm_password">
+                    <small class="alert4 form-text text-muted p-0"></small>
+                    <button id="signin" class="text-center bg-primary mt-3 btn text-white reg-button">
+                        Зарегистрироваться
+                    </button>
         </form>
     </div>
     <div class="message">
@@ -64,7 +62,6 @@ include "header.php"; ?>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
         $(document).ready(function() {
-
 
 
             $("#name").on("input", function() {
@@ -104,6 +101,11 @@ include "header.php"; ?>
             $('#signin').click(function(e) {
                 e.preventDefault();
 
+                var errorAlert1 = $(".alert1").text();
+                var errorAlert2 = $(".alert2").text();
+                var errorAlert3 = $(".alert3").text();
+                var errorAlert4 = $(".alert4").text();
+
                 var name = $('#name').val();
                 var surname = $('#surname').val();
                 var login = $('#login').val();
@@ -111,7 +113,7 @@ include "header.php"; ?>
                 var password = $('#password').val();
                 var confirm_password = $('#confirm_password').val();
 
-                if (password == confirm_password) {
+                if (errorAlert1 == "" && errorAlert2 == "" && errorAlert3 == "" && errorAlert4 == "") {
                     $.post("../authorization/signin.php", {
                         'name': name,
                         'surname': surname,
@@ -121,12 +123,13 @@ include "header.php"; ?>
                         'confirm_password': confirm_password,
                     }, function(data) {
                         if (data == "Вы успешно зарегистрировались") {
+                            window.location = "authorization.php";
                             return false;
                         }
                         $('#message_error').html(data);
                     });
-                }
-
+                } else
+                    $('#message_error').html("Поля не должны содержать ошибок");
 
             });
         });
