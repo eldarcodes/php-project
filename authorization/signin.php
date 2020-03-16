@@ -16,23 +16,25 @@ if ($database->checkData('login', $userlogin) > 0) {
     $_SESSION['returnname'] = $username;
     $_SESSION['returnsurname'] = $usersurname;
     $_SESSION['returnemail'] = $useremail;
-    header("Location: ../blocks/register.php");
+    echo $_SESSION['message'];
 } else if ($database->checkData('email', $useremail) > 0) {
     $_SESSION['returnname'] = $username;
     $_SESSION['returnsurname'] = $usersurname;
     $_SESSION['returnlogin'] = $userlogin;
     $_SESSION['message'] = "Пользователь с данной почтой существует";
-    header("Location: ../blocks/register.php");
+    echo $_SESSION['message'];
 } else {
     if ($userpassword !== 0 && $userpassword === $confirmpassword && !empty($userlogin) && !empty($useremail)) {
         $userpassword = md5($userpassword);
         mysqli_query($database->connect(), "INSERT INTO `users`(`id`, `name`, `surname`, `login`, `email`, `password`, `lvluser`, `date_registration`, `city`, `gender`, `avatar`, `date_birhday`) VALUES (NULL,'$username','$usersurname','$userlogin','$useremail','$userpassword','1','$user_register_date','','','$defaultAvatar','')");
         $_SESSION['message'] = "Вы успешно зарегистрировались";
-        header("Location: ../blocks/authorization.php");
+        echo $_SESSION['message'];
+        echo "<script>document.location.replace('authorization.php');</script>";
+        
     } else {
         $_SESSION['returnname'] = $username;
         $_SESSION['returnsurname'] = $usersurname;
         $_SESSION['message'] = "Попробуйте зарегистрироваться снова";
-        header("Location: ../blocks/register.php");
+        echo $_SESSION['message'];
     }
 }
