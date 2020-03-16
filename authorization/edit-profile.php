@@ -1,8 +1,6 @@
 <?php
 session_start();
-require "../scripts/classes.php";
-
-
+require_once "../scripts/classes.php";
 
 header("location: ../blocks/profile.php");
 
@@ -19,7 +17,7 @@ $login =  $_SESSION['user']['login'];
 
 
 if ($_FILES['profile-image']['name'] == '') {
-    $connecttion = mysqli_query($database->connect(), "SELECT * FROM `users` ");
+    $connecttion = mysqli_query($database->connect(), "SELECT * FROM `users` WHERE `login` = '$login'");
     $result = mysqli_fetch_assoc($connecttion);
     $path = $result['avatar'];
 } else {
@@ -35,3 +33,5 @@ $_SESSION['user']['name'] = $editName;
 $_SESSION['user']['surname'] = $editSurname;
 
 exit;
+
+

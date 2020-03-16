@@ -22,8 +22,8 @@ if ($database->checkData('login', $_SESSION['user']['login']) == 0 || !$_SESSION
                                         }  ?>" width="300" style="max-height: 600px;" class="mb-3" alt="Profile">
                             <div class="input-group mb-3">
                                 <div class="custom-file col-5">
-                                    <input name="profile-image" type="file" class="custom-file-input">
-                                    <label class="custom-file-label" for="inputGroupFile04">Выбрать файл</label>
+                                    <input name="profile-image" onchange="processSelectedFiles(this)" type="file" class="custom-file-input">
+                                    <label class="custom-file-label" for="inputGroupFile04">Выберите файл</label>
                                 </div>
                             </div>
                             <div class="card-title row d-flex align-items-center ">
@@ -66,6 +66,15 @@ if ($database->checkData('login', $_SESSION['user']['login']) == 0 || !$_SESSION
                 </div>
             </div>
         </div>
-    </section><?php
+    </section>
+    <script>
+        function processSelectedFiles(fileInput) {
+            var files = fileInput.files;
+            for (var i = 0; i < files.length; i++) {
+                document.querySelector('.custom-file-label').innerHTML = files[i].name;
             }
-                ?>
+        }
+    </script>
+<?php
+}
+?>
