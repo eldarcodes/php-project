@@ -1,1 +1,0 @@
-<?php echo '<div> <h1 style="text-align:center" > ВТОРАЯ СТРАНИЦА </h1>';

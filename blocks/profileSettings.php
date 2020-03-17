@@ -15,9 +15,10 @@ include("header.php");
             <button id="page-four" class="btn btn-outline-primary btn-block mt-2 settingsButton">Сменить три</button>
         </div>
         <div class="col-9 p-2">
-            <div id="content<?php if (!isset($_SESSION['user'])) {
+        <div <?php if (!isset($_SESSION['user'])) {
                                 echo "NotSession";
                             } ?>" class="shadow p-4 bg-white rounded d-block mt-2">
+                <div id="content">
                 <form method="post">
                     <div class="form-group">
                         <label>Введите старый пароль</label>
@@ -38,12 +39,9 @@ include("header.php");
                             Подтвердить
                         </button>
                     </div>
-
+                            
                 </form>
-            </div>
-        </div>
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script>
             $("#changePassword").on('click', function(e) {
                 var getoldPassword = $("#oldPassword").val();
@@ -59,6 +57,10 @@ include("header.php");
                 })
             });
         </script>
+                        </div>
+            </div>
+        </div>
+
     </div>
 </div>
 </div>
@@ -78,41 +80,24 @@ include("header.php");
 
     $("#page-one").click(function(e) {
         e.preventDefault();
-
-        $.post("changepassword-block.php", {},
-            function(data) {
-                $("#content").html(data);
-            }
-        )
+        $("#content").load("profileSettings.php #content");
+        history.pushState('data', 'Изменение аватарки', 'http://php-project/blocks/profileSettings.php');
     });
     $("#page-two").click(function(e) {
         e.preventDefault();
-
-        $.post("content.php", {},
-            function(data) {
-                $("#content").html(data);
-
-            }
-        )
+        history.pushState('data', 'Изменение аватарки', 'http://php-project/blocks/page-second.php');
+        $("#content").load("page-second.php #second-content");
     });
 
     $("#page-three").click(function(e) {
         e.preventDefault();
-
-        $.post("page-three.php", {},
-            function(data) {
-                $("#content").html(data);
-            }
-        )
+        history.pushState('data', 'Изменение аватарки', 'http://php-project/blocks/page-three.php');
+        $("#content").load("page-three.php #third-content");
     });
     $("#page-four").click(function(e) {
         e.preventDefault();
-
-        $.post("page-four.php", {},
-            function(data) {
-                $("#content").html(data);
-            }
-        )
+        history.pushState('data', 'Изменение аватарки', 'http://php-project/blocks/page-four.php');
+        $("#content").load("page-four.php #four-content");
     });
 </script>
 <!--  -->
